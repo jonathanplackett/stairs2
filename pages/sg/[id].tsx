@@ -47,18 +47,28 @@ const SgPage: NextPage<Props> = ({ list, errors }) => {
 export default SgPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await supabase.from('sample').select('id');
-  if (!data) {
+  try {
+    const { data, error } = await supabase.from('sample').select('id');
+    if (error) {
+      throw error;
+    }
+    if (data) {
+      const paths = data.map((post) => ({ params: { id: JSON.stringify(post.id) } }));
+      return {
+        paths: paths,
+        fallback: false,
+      };
+    }
+    return {
+      paths: [],
+      fallback: false,
+    };
+  } catch (error) {
     return {
       paths: [],
       fallback: false,
     };
   }
-  const paths = data.map((post) => ({ params: { id: JSON.stringify(post.id) } }));
-  return {
-    paths,
-    fallback: true,
-  };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
