@@ -10,76 +10,81 @@ type List = {
 };
 
 const Home: NextPage = () => {
-  const [list, setList] = useState<List[]>([]);
-  const [loading, setLoading] = useState(true);
+ 
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      // sampleテーブルから全カラムのデータをid順に取得
-      // dataに入る型はそのままだとany[]となるため.from<T>で指定
-      const { data, error } = await supabase.from<List>('sample').select('*').order('id');
+  const [currentName, setCurrentName] = useState("")
 
-      if (error) {
-        throw error;
+
+  async function getTimes() {
+
+    const { data, error } = await supabase
+    .from('climbs')
+    .select()
+    //.eq('user_id', "jonny")
+    
+    console.log("data",data)
+  
+  }
+
+
+
+
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
       }
-      if (data) {
-        setList(data);
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
       }
-    } catch (error: any) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
     }
-  };
+    return "";
+  }
 
+
+
+  
+  const setName = (e) => {
+  
+    console.log(e.target.value);
+  
+    document.cookie = "user_name=" + e.target.value;
+    document.cookie = "user_id=" + Math.floor(Math.random()*999999999999999);
+
+    setCurrentName(e.target.value)
+  
+  }
+  
+  
   useEffect(() => {
-    // supabaseからデータを取得
-    fetchData();
+   
+    setCurrentName(getCookie("user_name"))
+  
+  },[]);
+  
 
-    // subscriptionを生成
-    const subscription = supabase
-      .from('sample')
-      // .onの第一引数には'INSERT'や'UPDATE'などアクションを限定して指定することも可能
-      .on('*', (payload) => {
-        fetchData();
-        console.log('Change received!', payload);
-      })
-      .subscribe();
+  
 
-    return () => {
-      // アンマウント時にsubscriptionを解除
-      if (subscription) {
-        supabase.removeSubscription(subscription);
-      }
-    };
-  }, []);
-
-  if (loading) return <div>loading...</div>;
-  if (!list.length) return <div>missing data...</div>;
 
   return (
-    <div className={styles.container}>
-      <table>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>TITLE</td>
-            <td>CREATED_AT</td>
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.title}</td>
-              <td>{item.created_at}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div>
+
+      <form action="/action_page.php">
+        <label for="fname">Enter your name:</label>
+        <input onChange={setName} type="text" id="fname" name="fname" value={currentName} />
+       
+       
+      </form>
+
     </div>
-  );
+  )
+
+  
 };
 
 export default Home;
