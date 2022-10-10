@@ -44,7 +44,7 @@ const Home: NextPage = () => {
 
 
   
-  const setName = (e) => {
+  const setName = (e: Event) => {
   
     console.log(e.target.value);
   
