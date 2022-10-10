@@ -46,7 +46,13 @@ const End: NextPage = () => {
     console.log("error",response.error)
 
 
-    if(response.data.length == 0)
+    if(!response.data)
+    {
+      setError("no_start")
+    }
+
+
+    else if(response.data.length == 0)
     {
       setError("no_start")
     }
