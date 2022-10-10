@@ -13,7 +13,7 @@ const End = () => {
   const [currentName, setCurrentName] = useState("")
 
 
-
+  const [haveEnded, setHaveEnded] = useState(false)
 
   function getCookie(cname) {
     let name = cname + "=";
@@ -102,6 +102,7 @@ const End = () => {
     }
 
     
+    setHaveEnded(true)
 
   }
   
@@ -129,7 +130,7 @@ const End = () => {
 
     <br /> <br />
 
-    <Leaderboard />
+   {haveEnded ? <Leaderboard /> : <></>}
 
   </div> 
   

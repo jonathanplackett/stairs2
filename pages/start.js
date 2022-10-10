@@ -9,6 +9,8 @@ const Start = () => {
 
   const [currentName, setCurrentName] = useState("")
 
+  const [error, setError] = useState(false)
+
 
   function getCookie(cname) {
     let name = cname + "=";
@@ -57,10 +59,24 @@ const Start = () => {
 
 
   useEffect(() => {
-   
-    sendTime()
 
-    setCurrentName(getCookie("user_name"))
+
+    if(getCookie("user_name") && getCookie("user_name").length > 0)
+    {
+
+      sendTime()
+
+      setCurrentName(getCookie("user_name"))
+
+    }
+
+    else
+    {
+      window.location = "./"
+    }
+    
+   
+   
 
   },[]);
 
@@ -71,6 +87,9 @@ const Start = () => {
  
 
   return (
+
+
+  
     
     <div>Go {currentName}, Go!</div>
   )
