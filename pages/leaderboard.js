@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 
-const Home = () => {
+const Leaderboard = () => {
  
 
   const [currentName, setCurrentName] = useState("")
+
+  const [allTimes, setAllTimes] = useState()
 
 
   async function getTimes() {
@@ -15,9 +17,14 @@ const Home = () => {
     const { data, error } = await supabase
     .from('climbs')
     .select()
-    //.eq('user_id', "jonny")
+    .not( "time_taken", "is", "null" )
+
+    
+    .order('time_taken', { ascending: true })
     
     console.log("data",data)
+
+    setAllTimes(data)
   
   }
 
@@ -43,26 +50,11 @@ const Home = () => {
 
 
 
-  
-  const setName = (e) => {
 
-
-
-        console.log(e.target.value);
-    
-        document.cookie = "user_name=" + e.target.value;
-        document.cookie = "user_id=" + Math.floor(Math.random()*999999999999999);
-    
-        setCurrentName(e.target.value)
-        
-
-  
-  }
-  
   
   useEffect(() => {
    
-    setCurrentName(getCookie("user_name"))
+    getTimes()
   
   },[]);
   
@@ -73,20 +65,10 @@ const Home = () => {
   return (
     <div>
 
-      <form action="/action_page.php">
 
-        <label for="fname">Enter your name to Race!</label>
 
-        <br /><br />
+        {allTimes ? allTimes.map( (time, index) => (<div>{index+1}: {time.user_name} | {time.time_taken.toFixed(3)}</div>) ) : <></>}
 
-        <input onChange={setName} type="text" id="fname" name="fname" value={currentName} />
-
-        <br /><br />
-
-        Then scan the 'Start' QR code to begin
-       
-       
-      </form>
 
     </div>
   )
@@ -94,4 +76,4 @@ const Home = () => {
 
 };
 
-export default Home;
+export default Leaderboard;

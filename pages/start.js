@@ -72,7 +72,7 @@ const Start = () => {
 
   return (
     
-    <div>Go GO Go!!! {currentName}</div>
+    <div>Go {currentName}, Go!</div>
   )
 }
 

@@ -1,9 +1,16 @@
 html,
 body {
+
+  font-size: 50pt;
   padding: 0;
-  margin: 0;
+  margin: 20px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+input {
+  font-size: 50pt;
+  padding: 10px;
 }
 
 a {

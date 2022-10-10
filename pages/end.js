@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 
+import Leaderboard from './leaderboard.js';
+
+
 const End = () => {
 
 
@@ -122,7 +125,11 @@ const End = () => {
   
   <div>
 
-    {timeTaken > 0 ? currentName + " took: " + timeTaken.toFixed(3) + " seconds" : ""}
+    {timeTaken > 0 ? "Well done " + currentName + ", you took: " + timeTaken.toFixed(3) + " seconds" : ""}
+
+    <br /> <br />
+
+    <Leaderboard />
 
   </div> 
   
