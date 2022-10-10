@@ -3,11 +3,6 @@ import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
-type List = {
-  id: string;
-  title: string;
-  created_at: string;
-};
 
 const Home: NextPage = () => {
  
@@ -30,7 +25,7 @@ const Home: NextPage = () => {
 
 
 
-  function getCookie(cname) {
+  function getCookie(cname : String) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -84,7 +79,7 @@ const Home: NextPage = () => {
     </div>
   )
 
-  
+
 };
 
 export default Home;

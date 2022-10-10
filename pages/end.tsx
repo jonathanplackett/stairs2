@@ -13,7 +13,7 @@ const End: NextPage = () => {
 
 
 
-  function getCookie(cname) {
+  function getCookie(cname : String) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
