@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 
-function MyApp({ Component, pageProps }: AppProps) {
+const End: NextPage = () => {
 
 
 
@@ -125,4 +125,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default End
