@@ -10,7 +10,7 @@ const Start: NextPage = () => {
   const [currentName, setCurrentName] = useState("")
 
 
-  function getCookie(cname) {
+  function getCookie(cname : String) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
