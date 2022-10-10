@@ -1,10 +1,9 @@
-import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 
-const End: NextPage = () => {
+const End = () => {
 
 
 
@@ -13,7 +12,7 @@ const End: NextPage = () => {
 
 
 
-  function getCookie(cname : String) {
+  function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');

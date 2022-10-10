@@ -1,16 +1,16 @@
-import type { NextPage } from 'next';
+
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 
-const Start: NextPage = () => {
+const Start = () => {
 
 
   const [currentName, setCurrentName] = useState("")
 
 
-  function getCookie(cname : String) {
+  function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
