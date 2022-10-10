@@ -72,7 +72,7 @@ const Start: NextPage = () => {
 
   return (
     
-    <div>Go GO Go {currentName}</div>
+    <div>Go GO Go!!! {currentName}</div>
   )
 }
 
